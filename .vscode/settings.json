@@ -1,0 +1,37 @@
+{
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": false,
+      "source.organizeImports": true
+    }
+  },
+  "python.formatting.blackPath": "black",
+  "python.linting.banditEnabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "editor.tabSize": 4,
+  "python.linting.banditArgs": ["-c pyproject.toml"],
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoImportUserSymbols": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "warning",
+    "reportMissingTypeStubs": "information",
+    "reportUnknownArgumentType": "information",
+    "reportUnknownMemberType": "information",
+    "reportUnknownParameterType": "information",
+    "reportUnknownVariableType": "information"
+  },
+  "python.analysis.ignore": [
+    "typings",
+    ".venv"
+  ],
+  "vsintellicode.java.completionsEnabled": false,
+  "vsintellicode.typescript.completionsEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "python.testing.debugPort": 5679
+}
