@@ -7,7 +7,7 @@
   },
   "python.formatting.blackPath": "black",
   "python.linting.banditEnabled": true,
-  "python.linting.mypyEnabled": true,
+  "python.linting.mypyEnabled": false,
   "python.terminal.activateEnvInCurrentTerminal": true,
   "editor.tabSize": 4,
   "python.linting.banditArgs": ["-c pyproject.toml"],

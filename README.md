@@ -28,7 +28,7 @@ brew install poetry
 
 # create a virtual environment in this project
 poetry config virtualenvs.in-project true
-poetry env use 3.10
+poetry env use 3.11
 
 # activate the virtual environment and install dependencies
 source .venv/bin/activate
@@ -83,4 +83,4 @@ poetry run task build
 
 ## License
 
-python-template is licensed under the GNU General Public License version 3.0 (GPL-3.0, or GPLv3).
+This project is licensed under the GNU General Public License version 3.0 (GPL-3.0, or GPLv3).

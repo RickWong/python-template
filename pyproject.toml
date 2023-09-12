@@ -12,9 +12,10 @@ beautifulsoup4 = "^4.11.2"
 httpx = "^0.23.3"
 more-itertools = "^9.0.0"
 orjson = "^3.8.7"
-python = "3.10.*"
+python = "3.11.*"
 python-dateutil = "^2.8.2"
 result = "^0.9.0"
+pyright = "^1.1.324"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.4"
@@ -47,16 +48,21 @@ all_modules = "app tests"
 test_modules = "tests"
 
 [tool.taskipy.tasks]
-dev = "watchfiles 'python -m {current_module}'"
-debug = "watchfiles 'env DEBUG=1 python -m debugpy --listen 5678 --wait-for-client -m {current_module}'"
+start = "python -m {current_module}"
+dev = "watchfiles --sigint-timeout 0 'python -m {current_module}'"
+debug = "watchfiles --sigint-timeout 0 'env DEBUG=1 python -m debugpy --listen 5678 --wait-for-client -m {current_module}'"
+profile = "python -m cProfile -m {current_module}"
 lint = "ruff check --fix {all_modules}"
 format = "black {all_modules}"
-typecheck = "mypy --install-types {all_modules}"
+typecheck = "pyright"
 audit = "bandit --config pyproject.toml --recursive {all_modules}"
 test = "pytest --numprocesses 4 {test_modules}"
-devtest = "watchfiles 'pytest --numprocesses 4 {test_modules}'"
+devtest = "watchfiles --sigint-timeout 0 'pytest --numprocesses 4 {test_modules}'"
 coverage = "coverage run -m pytest {all_modules} && coverage report"
 build = "task lint; task format; task typecheck; task audit; task coverage"
+
+[tool.pyright]
+pythonVersion = "3.11"
 
 [tool.mypy]
 disallow_untyped_calls = true
@@ -74,11 +80,11 @@ ignore_missing_imports = true
 skips = ["B101"]
 
 [tool.black]
-line-length = 80
+line-length = 90
 
 [tool.pytest.ini_options]
 addopts = ["-v", "--durations=0", "--durations-min=0.0005"]
 
 [tool.ruff]
-line-length = 80
+line-length = 90
 exclude = [".vscode"]
