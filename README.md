@@ -1,22 +1,20 @@
-# Python Template by Rick Wong 🙋🏻‍♂️
+# PyPy Template by Rick Wong 🙋🏻‍♂️
 
-Welcome to the best Python template ever.
+Welcome to the best PyPy template in 2025.
 
 This Python template includes: modern Python tools, handy scripts for development and testing, VS Code extension recommendations, VS Code settings and launch configurations.
 
 What's inside:
 
 - bandit
-- black
+- basedpyright
 - coverage
 - debugpy
-- mypy
 - pytest
 - python-dotenv
 - pyperf
 - ruff
-- taskipy
-- watchfiles
+- watchdog
 
 ## Installation
 
@@ -24,55 +22,44 @@ What's inside:
 # get brew from https://brew.sh
 
 # install poetry
-brew install poetry
-
-# create a virtual environment in this project
-poetry config virtualenvs.in-project true
-poetry env use 3.11
+brew install just
 
 # activate the virtual environment and install dependencies
-source .venv/bin/activate
-poetry install
+just install
 
 # build project to install mypy dependencies
-poetry run task build
+just build
 ```
 
 ## Usage
 
 ```sh
 # run the 'app' module with automatic restarts
-poetry run task dev
+just dev
 
 # run the 'tests' module with pytest just once
-poetry run task test
-
-# run the 'tests' module with pytest with automatic restarts
-poetry run task devtest
+just test
 
 # debug the 'app' module on port 5678 with automatic restarts
-poetry run task debug
+just debug
 
 # format all the code
-poetry run task format
+just format
 
 # typecheck all the code
-poetry run task typecheck
+just typecheck
 
 # lint all the code (lints are extra rules agreed upon by the team)
-poetry run task lint
+just lint
 
 # run all build steps: lint, format, typecheck, audit, test and coverage
-poetry run task build
+just build
 ```
 
 ## Recommended VS Code Extensions
 
 - Better TOML
 - DotENV
-- Jupyter
-- Jupyter Keymap
-- Jupyter Notebook Render
 - Pylance
 - Python
 - Python Indent

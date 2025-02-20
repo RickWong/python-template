@@ -1,89 +1,40 @@
-[tool.poetry]
+[project]
 name = "python-template"
-version = "1.0.0"
-description = "A modern Python project template"
-authors = ["Rick Wong <0shuttle.browses@icloud.com>"]
+version = "1.1.0"
+description = "A modern Python project template using uv and pypy"
 readme = "README.md"
-packages = [{include = "app"}]
-license = "GPL-3.0"
+requires-python = ">=3.11"
+license = { file = "LICENSE.md" }
+dependencies = [
+    "httpx>=0.23.3",
+    "more-itertools>=9.0.0",
+    "python-dateutil>=2.8.2",
+    "result>=0.9.0",
+]
 
-[tool.poetry.dependencies]
-beautifulsoup4 = "^4.11.2"
-httpx = "^0.23.3"
-more-itertools = "^9.0.0"
-orjson = "^3.8.7"
-python = "3.11.*"
-python-dateutil = "^2.8.2"
-result = "^0.9.0"
-pyright = "^1.1.324"
-
-[tool.poetry.group.dev.dependencies]
-bandit = "^1.7.4"
-black = "^23.1.0"
-coverage = "^7.2.0"
-debugpy = "^1.6.6"
-ipykernel = "^6.21.2"
-mypy = "^1.0.1"
-pytest = "^7.2.1"
-pytest-xdist = "^3.2.0"
-python-dotenv = "^1.0.0"
-pyperf = "^2.5.0"
-ruff = "^0.0.252"
-taskipy = "^1.10.3"
-toml = "^0.10.2"
-watchfiles = "^0.18.1"
-pytest-asyncio = "^0.20.3"
-lxml = "^4.9.2"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.taskipy.settings]
-use_vars = true
-
-[tool.taskipy.variables]
-current_module = "app"
-all_modules = "app tests"
-test_modules = "tests"
-
-[tool.taskipy.tasks]
-start = "python -m {current_module}"
-dev = "watchfiles --sigint-timeout 0 'python -m {current_module}'"
-debug = "watchfiles --sigint-timeout 0 'env DEBUG=1 python -m debugpy --listen 5678 --wait-for-client -m {current_module}'"
-profile = "python -m cProfile -m {current_module}"
-lint = "ruff check --fix {all_modules}"
-format = "black {all_modules}"
-typecheck = "pyright"
-audit = "bandit --config pyproject.toml --recursive {all_modules}"
-test = "pytest --numprocesses 4 {test_modules}"
-devtest = "watchfiles --sigint-timeout 0 'pytest --numprocesses 4 {test_modules}'"
-coverage = "coverage run -m pytest {all_modules} && coverage report"
-build = "task lint; task format; task typecheck; task audit; task coverage"
-
-[tool.pyright]
-pythonVersion = "3.11"
-
-[tool.mypy]
-disallow_untyped_calls = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-exclude = [".venv/", "typings"]
-
-[[tool.mypy.overrides]]
-module = ["debugpy.*", "multiprocess"]
-ignore_missing_imports = true
+[dependency-groups]
+dev = [
+    "bandit>=1.7.4",
+    "debugpy>=1.6.6",
+    "pytest>=7.2.1",
+    "pytest-xdist>=3.2.0",
+    "python-dotenv[cli]>=1.0.0",
+    "pyperf>=2.5.0",
+    "pytest-asyncio>=0.20.3",
+    "ruff>=0.9.6",
+    "basedpyright>=1.27.1",
+    "watchdog>=6.0.0",
+]
 
 [tool.bandit]
 skips = ["B101"]
 
-[tool.black]
-line-length = 90
+[tool.basedpyright]
+reportUnusedCallResult = false
 
 [tool.pytest.ini_options]
-addopts = ["-v", "--durations=0", "--durations-min=0.0005"]
+addopts = ["-v", "--durations=0", "--durations-min=0.005"]
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff]
 line-length = 90
